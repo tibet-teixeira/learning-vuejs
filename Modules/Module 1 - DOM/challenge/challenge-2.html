@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 2</title>
+    <script src="../../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="challenge-2">
+        <h1>{{title}}</h1>
+        <div>
+            <p>
+                <button v-on:click="show_alert">Show alert</button>
+            </p>
+        </div>
+
+        <div>
+            <input v-on:keyUp="input_event" type="text" name="" id="">
+            <p> {{value}} </p>
+        </div>
+
+        <div>
+            <input v-on:keyUp.enter="input_enter_event" type="text" name="" id="">
+            <p> {{value_enter}} </p>
+        </div>
+    </div>
+    <script src="js/challenge-2.js"></script>
+</body>
+
+</html>
