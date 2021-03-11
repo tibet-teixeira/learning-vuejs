@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning VueJs</title>
+    <script src="../../js/vue.js"></script>
+
+</head>
+
+<body>
+    <div id="app">
+        <h1 v-once>{{ title }}</h1> <!-- Vue data (v-once: doesn't update this attribute) -->
+        <h2>{{ saudacao() }}</h2> <!-- Vue method -->
+        <a v-bind:href=link>Google</a> <!-- Vue property (bind) -->
+        <p v-html="linkHtml"></p> <!-- v-html: print html -->
+    </div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            title: 'Hello VueJS!!',
+            link: 'http://www.google.com.br',
+            linkHtml: '<a href="http://www.udemy.com">Udemy</a>'
+        },
+        methods: {
+            saudacao() {
+                this.title = 'I\'m learning VueJs!'
+            	return this.title
+            },
+        },
+    })
+</script>
+
+</html>
