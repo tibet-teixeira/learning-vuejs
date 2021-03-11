@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Events</title>
+    <script src="../../js/vue.js"></script>
+</head>
+
+<body>
+    <div id="app" v-on:mousemove="get_x_y_pointer">
+        <h1>Events with VueJS</h1>
+        <p><strong>Counter:</strong> {{counter}} </p>
+        <button v-on:click="sum">+1</button> <!-- v-on: events -->
+        <hr />
+        <p><strong>Mouse:</strong> X: {{mouse_x}} - Y: {{mouse_y}}</p>
+        <hr />
+        <p><strong>Counter + 5:</strong> {{counter_step}} </p>
+        <button v-on:click="sum_step(5, $event)">+1</button> <!-- $event: token to pass event for method -->
+        <hr />
+        <p><strong v-on:mousemove="stop">Stop here!!</strong></p>
+        <hr />
+        <p><strong v-on:mousemove.stop="">Stop here too!!</strong></p> <!-- Stop event with modifier event -->
+        <hr />
+
+        <!-- keyUp default -->
+        <p>
+            <strong>Key up: </strong>
+            <input v-on:keyUp="alert(null)" type="text">
+        </p>
+
+        <!-- keyUp with modifier event ENTER -->
+        <p>
+            <strong>Key up ENTER: </strong>
+            <input v-on:keyUp.enter="alert('Alert ENTER')" type="text">
+        </p>
+
+        <!-- keyUp with modifier event ALT + ENTER -->
+        <p>
+            <strong>Key up ALT + ENTER: </strong>
+            <input v-on:keyUp.alt.enter="alert('Alert ALT + ENTER')" type="text">
+        </p>
+    </div>
+
+    <script>
+        new Vue({
+            el: '#app',
+            data: {
+                counter: 0,
+                counter_step: 0,
+                mouse_x: 0,
+                mouse_y: 0,
+            },
+            methods: {
+                sum() {
+                    this.counter += 1
+                },
+                sum_step(step, event) {
+                    this.counter_step += step
+                    console.log(event)
+                },
+                get_x_y_pointer(event) {
+                    this.mouse_x = event.clientX
+                    this.mouse_y = event.clientY
+                },
+                stop(event) {
+                    event.stopPropagation() // stop event
+                },
+                alert(msg) {
+                    msg = msg ? msg : 'Alert default'
+                    alert(msg)
+                }
+            },
+        });
+    </script>
+</body>
+
+</html>
