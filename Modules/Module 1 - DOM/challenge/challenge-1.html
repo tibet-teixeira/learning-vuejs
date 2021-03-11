@@ -1,0 +1,27 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Challenge 1</title>
+    <script src="../../../js/vue.js"></script>
+</head>
+<body>
+    <div id="challenge">
+        <h1>VueJS Challenge #1</h1>
+        <p>Using VueJS - Name: {{name}} | Age: {{age}}</p>
+        <p>Age multiplied by 3: {{age_mult_3()}}</p>
+        <p>Random number: {{rand_number()}}</p>
+
+        <div>
+            <p><span>Show image</span></p>
+            <img v-bind:src="vuejs_img" alt="VueJS" width="150px">
+        </div>
+
+        <div>
+            <input type="text" v-bind:value="input_value">
+        </div>
+    </div>
+    <script src="js/script.js"></script>
+</body>
+</html>
