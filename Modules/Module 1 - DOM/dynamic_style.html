@@ -1,0 +1,65 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Learning VueJs</title>
+    <script src="../../js/vue.js"></script>
+    <link rel="stylesheet" href="../../css/style.css">
+</head>
+
+<body>
+<div id="app">
+    <div class="boxes">
+        <div class="demo" :class="{c1: applyC1, c2:!applyC1}" @click="applyC1 = !applyC1">
+            <h2>Box 1</h2>
+        </div>
+        <div class="demo" :class="defineStyle" @click="applyC2 = !applyC2">
+            <h2>Box 2</h2>
+        </div>
+        <div class="demo" :class="[styleCss, 'rotate']" @click="applyC3 = !applyC3">
+            <h2>Box 3</h2>
+        </div>
+        <div class="demo" :style="myStyle">
+            <h2>Box 4</h2>
+        </div>
+
+    </div>
+    <hr>
+    <strong>Box 3 Class:</strong> <input type="text" v-model="styleCss">
+    <br>
+    <strong>Box 4 font size:</strong> <input type="text" v-model="size">
+</div>
+</body>
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            applyC1: false,
+            applyC2: false,
+            applyC3: false,
+            styleCss: 'c3',
+            colorBox4: '#ef476f',
+            size: 16
+        },
+        computed: {
+            defineStyle() {
+                return {
+                    c2: this.applyC2,
+                    c3: !this.applyC2
+                }
+            },
+            myStyle() {
+                return {
+                    backgroundColor: this.colorBox4,
+                    fontFamily: 'Roboto',
+                    fontSize: this.size + 'px',
+                }
+            }
+        },
+    })
+</script>
+
+</html>

@@ -1,0 +1,29 @@
+.boxes {
+    display: flex;
+    justify-content: space-around;
+}
+
+.demo {
+    width: 100px;
+    height: 100px;
+    background-color: #888;
+    padding: 10px;
+    text-align: center;
+    line-height: 50px;
+}
+
+.c1 {
+    background-color: #ef476f;
+}
+
+.c2 {
+    background-color: #ffd166;
+}
+
+.c3 {
+    background-color: #06d6a0;
+}
+
+.rotate {
+    transform: rotate(45deg);
+}
