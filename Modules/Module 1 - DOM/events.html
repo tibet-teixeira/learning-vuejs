@@ -3,77 +3,122 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta content="width=device-width, initial-scale=1.0" name="viewport">
     <title>Events</title>
     <script src="../../js/vue.js"></script>
 </head>
 
 <body>
-    <div id="app" v-on:mousemove="get_x_y_pointer">
-        <h1>Events with VueJS</h1>
-        <p><strong>Counter:</strong> {{counter}} </p>
-        <button v-on:click="sum">+1</button> <!-- v-on: events -->
-        <hr />
-        <p><strong>Mouse:</strong> X: {{mouse_x}} - Y: {{mouse_y}}</p>
-        <hr />
-        <p><strong>Counter + 5:</strong> {{counter_step}} </p>
-        <button v-on:click="sum_step(5, $event)">+1</button> <!-- $event: token to pass event for method -->
-        <hr />
-        <p><strong v-on:mousemove="stop">Stop here!!</strong></p>
-        <hr />
-        <p><strong v-on:mousemove.stop="">Stop here too!!</strong></p> <!-- Stop event with modifier event -->
-        <hr />
+<div id="app" v-on:mousemove="get_x_y_pointer">
+    <h1>Events with VueJS</h1>
+    <p>
+        <strong>Counter:</strong> {{counter}}
+    </p>
+    <button v-on:click="sum">Soma 1</button> <!-- v-on: events (@) -->
+    <hr>
+    <p>
+        <strong>Mouse:</strong> X: {{mouse_x}} - Y: {{mouse_y}}
+    </p>
+    <hr>
+    <p>
+        <strong>Counter + 5:</strong> {{counter_step}}
+    </p>
+    <button v-on:click="sum_step(5, $event)">Soma 5</button> <!-- $event: token to pass event for method -->
+    <hr>
+    <p>
+        <strong v-on:mousemove="stop">Stop here!!</strong>
+    </p>
+    <hr>
+    <p>
+        <strong v-on:mousemove.stop="">Stop here too!!</strong>
+    </p> <!-- Stop event with modifier event -->
+    <hr/>
 
-        <!-- keyUp default -->
-        <p>
-            <strong>Key up: </strong>
-            <input v-on:keyUp="alert(null)" type="text">
-        </p>
+    <!-- keyUp default -->
+    <p>
+        <strong>Key up: </strong>
+        <input type="text" v-on:keyUp="alert(null)">
+    </p>
 
-        <!-- keyUp with modifier event ENTER -->
-        <p>
-            <strong>Key up ENTER: </strong>
-            <input v-on:keyUp.enter="alert('Alert ENTER')" type="text">
-        </p>
+    <!-- keyUp with modifier event ENTER -->
+    <p>
+        <strong>Key up ENTER: </strong>
+        <input type="text" v-on:keyUp.enter="alert('Alert ENTER')">
+    </p>
 
-        <!-- keyUp with modifier event ALT + ENTER -->
-        <p>
-            <strong>Key up ALT + ENTER: </strong>
-            <input v-on:keyUp.alt.enter="alert('Alert ALT + ENTER')" type="text">
-        </p>
-    </div>
+    <!-- keyUp with modifier event ALT + ENTER -->
+    <p>
+        <strong>Key up ALT + ENTER: </strong>
+        <input type="text" v-on:keyUp.alt.enter="alert('Alert ALT + ENTER')">
+    </p>
+    <hr>
+    <p>
+        <strong> {{twdb}} </strong>
+        <br> <br>
+        <input type="text" v-model:input="twdb">
+    </p>
+    <hr>
+    <p>
+        <strong> Property computed </strong>
+        <br> <br>
+        <button v-on:click="counter_comp1++">Add</button>
+        <button v-on:click="counter_comp1--">Remove</button>
+        <button v-on:click="counter_comp2+=5">Add counter 2</button>
+        <br> <br>
+        {{counter_comp1}} | {{counter_comp2}}
+        <br> <br>
+        <strong>Counter 1 value:</strong> {{result}}
+    </p>
+</div>
 
-    <script>
-        new Vue({
-            el: '#app',
-            data: {
-                counter: 0,
-                counter_step: 0,
-                mouse_x: 0,
-                mouse_y: 0,
+<script>
+    new Vue({
+        el: '#app',
+        data: {
+            counter: 0,
+            counter_step: 0,
+            mouse_x: 0,
+            mouse_y: 0,
+            twdb: '2-way data bind',
+            counter_comp1: 0,
+            counter_comp2: 0,
+        },
+        computed: { // property computed
+            result() {
+                console.log('Method called')
+                return this.counter_comp1 >= 5 ? 'Greater than or equal to 5' : 'less than 5'
             },
-            methods: {
-                sum() {
-                    this.counter += 1
-                },
-                sum_step(step, event) {
-                    this.counter_step += step
-                    console.log(event)
-                },
-                get_x_y_pointer(event) {
-                    this.mouse_x = event.clientX
-                    this.mouse_y = event.clientY
-                },
-                stop(event) {
-                    event.stopPropagation() // stop event
-                },
-                alert(msg) {
-                    msg = msg ? msg : 'Alert default'
-                    alert(msg)
-                }
+        },
+        watch: { // watches a property
+            counter_comp1(currentValue, oldValue) {
+                console.log(currentValue + ' | ' + oldValue)
+                setTimeout(() => {
+                    this.counter_comp1 = 0
+                }, 2000)
             },
-        });
-    </script>
+        },
+        methods: {
+            sum() {
+                this.counter += 1
+            },
+            sum_step(step, event) {
+                this.counter_step += step
+                console.log(event)
+            },
+            get_x_y_pointer(event) {
+                this.mouse_x = event.clientX
+                this.mouse_y = event.clientY
+            },
+            stop(event) {
+                event.stopPropagation() // stop event
+            },
+            alert(msg) {
+                msg = msg ? msg : 'Alert default'
+                alert(msg)
+            }
+        },
+    });
+</script>
 </body>
 
 </html>

@@ -14,7 +14,7 @@
     <div id="app">
         <h1 v-once>{{ title }}</h1> <!-- Vue data (v-once: doesn't update this attribute) -->
         <h2>{{ saudacao() }}</h2> <!-- Vue method -->
-        <a v-bind:href=link>Google</a> <!-- Vue property (bind) -->
+        <a v-bind:href=link>Google</a> <!-- v-bind: Vue property (:) -->
         <p v-html="linkHtml"></p> <!-- v-html: print html -->
     </div>
 </body>
